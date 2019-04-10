@@ -189,11 +189,11 @@ const HelloWorldIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
   },
   handle(handlerInput) {
-    const speechText = 'Hello from your Strava bot';
+    const speechText = 'Hello from Strava Skills';
 
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withSimpleCard('Hello !', speechText)
+      //.withSimpleCard('Hello !', speechText)
       .getResponse();
   }
 };
@@ -210,7 +210,7 @@ const HelpIntentHandler = {
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
-      .withSimpleCard('Hello World', speechText)
+      //.withSimpleCard('Hello World', speechText)
       .getResponse();
   }
 };
