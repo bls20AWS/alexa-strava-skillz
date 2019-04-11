@@ -116,8 +116,14 @@ const RunningIntentHandler = {
           "Run Named: '"+runName+"' , "+
           "Duration: "+ runTime+", "+
           "Distance: <say-as interpret-as='unit'>"+runDistance+"km</say-as>, "+
-          "Average Speed: <say-as interpret-as='time'>"+runSpeed+"</say-as> per kilometer, "+
-          "Average Heart rate: "+average_heartrate+ achievementText;
+          "Average Speed: <say-as interpret-as='time'>"+runSpeed+"</say-as> per kilometer, "
+          
+          if(average_heartrate){
+            speechText=speechText+" Average Heart rate: "+average_heartrate;
+          }
+          
+           speechText=speechText + achievementText;
+          
 
           const getOptions2 = buildGetOptions('https://www.strava.com/api/v3/activities/'+id,accessToken);
           const response2 = await chuck(getOptions2);
