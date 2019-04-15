@@ -51,13 +51,7 @@ const RunningIntentConfirmSlotHandler = {
     handle(handlerInput) {
         const currentIntent = handlerInput.requestEnvelope.request.intent; 
         var slot_date = new Date(currentIntent.slots.date.value);
-        var desc = currentIntent.slots.desc.value;
         var today = new Date();
-        if(desc =='last'){// if we have the desc slot then we forct date to something acceptable
-            today.setFullYear( today.getFullYear() - 1 )
-            currentIntent.slots.date.value = today.toISOString().slice(0, 10);
-        }
-       
         if(slot_date > today){
             slot_date.setFullYear( slot_date.getFullYear() - 1 )
             currentIntent.slots.date.value = slot_date.toISOString().slice(0, 10);
@@ -91,12 +85,81 @@ const RunningIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
+<<<<<<< HEAD
   handlerInput.attributesManager.setSessionAttributes({"athleteID":id,"firstname":firstName});
     return handlerInput.responseBuilder
          .speak('speechTexthi')
       .withSimpleCard('Goodbye!', speechText)
       .getResponse();
 
+=======
+    async handle(handlerInput) {
+      var accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
+      if (accessToken == undefined){
+        var speechText = "Please use the Alexa app to link your Amazon account with your Strava Account.";               
+        return handlerInput.responseBuilder.speak(speechText).withLinkAccountCard().getResponse();
+      } else {
+        const currentIntent = handlerInput.requestEnvelope.request.intent; 
+        var slot_date = new Date(currentIntent.slots.date.value); 
+        const start = slot_date.getTime() / 1000;
+        const end = start + (86400000 / 1000) 
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        const getOptions = buildGetOptions('https://www.strava.com/api/v3/athlete/activities?after='+start+'&before='+end,accessToken);
+        const response = await chuck(getOptions);
+        
+        if(response.length>0){
+          var speechText = "<audio src='soundbank://soundlibrary/human/amzn_sfx_person_running_01'/> ";
+        }else{
+          var speechText ="I cant find any activities for "+slot_date.toISOString().slice(0, 10)+", please check that's the right date."
+        }
+        if(response.length >1){
+          speechText = speechText+" It looks like you did more than 1 activity. ";
+        }
+        
+        for(i=0; i<response.length; i++){
+          var runName = response[i].name;
+          var runTime = toDDHHMMSS(response[i].moving_time);
+          var runDistance = (response[i].distance/1000).toFixed(2);
+          var runSpeed = getSeconds(response[i].average_speed);
+          var achievements = response[i].achievement_count;
+          var average_heartrate = response[i].average_heartrate;
+          var id = response[i].id;
+          var achievementText=''
+          if(achievements >0){
+             achievementText = ' <break time="500ms"/><say-as interpret-as="interjection">Well done</say-as> You earnt '+achievements+' achievements <audio src="soundbank://soundlibrary/human/amzn_sfx_crowd_applause_05"/>';
+          }
+          
+          speechText= speechText+"Date: <say-as interpret-as='date'>"+response[i].start_date_local.slice(0, 10)+"</say-as> , "+
+          "Run Named: '"+runName+"' , "+
+          "Duration: "+ runTime+", "+
+          "Distance: <say-as interpret-as='unit'>"+runDistance+"km</say-as>, "+
+          "Average Speed: <say-as interpret-as='time'>"+runSpeed+"</say-as> per kilometer, "
+          
+          if(average_heartrate){
+            speechText=speechText+" Average Heart rate: "+average_heartrate;
+          }
+          
+           speechText=speechText + achievementText;
+          
+
+          const getOptions2 = buildGetOptions('https://www.strava.com/api/v3/activities/'+id,accessToken);
+          const response2 = await chuck(getOptions2);
+          if(response2.similar_activities){
+            var SimilarAverage = response2.similar_activities.average_speed;
+            var SimilarAvarageRunTime = response[i].distance/SimilarAverage;
+            var difference = response[i].moving_time - SimilarAvarageRunTime;
+            if(difference < 0){
+              var verb ='faster';
+            }else{
+              var verb ='slower';
+            }
+            speechText= speechText+   ". This is "+toDDHHMMSS(Math.round(Math.abs(difference)))+' '+verb+' than your average for this run';
+          }
+        }
+        return handlerInput.responseBuilder.speak(speechText).reprompt("What would you like?").getResponse();
+      }
+    }
+>>>>>>> parent of 2a91419... subimssion
 };
 //
 /////main running intent for strava///
@@ -185,9 +248,81 @@ const RunningIntentHandler = {
 
 
 
+//Athlete intent///
 const YTDIntentHandler = {
   canHandle(handlerInput) {
+<<<<<<< HEAD
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+=======
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'YTDIntent';
+  },
+    async handle(handlerInput) {
+        var accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
+        if (accessToken == undefined){
+            // The request did not include a token, so tell the user to link
+            // accounts and return a LinkAccount card
+            var speechText = "You must have a Strava account access your running stats. " + 
+                              "Please use the Alexa app to link your Amazon account " + 
+                              "with Strava Account.";        
+            
+            return handlerInput.responseBuilder
+                .speak(speechText)
+                .withLinkAccountCard()
+                .getResponse();
+                
+        } else {
+          const attributes = handlerInput.attributesManager.getSessionAttributes();
+          
+            const getOptions = buildGetOptions('/api/v3/athletes/'+attributes.athleteID+'/stats',accessToken);
+            const response = await chuck(getOptions);
+                  var numRuns = response.ytd_run_totals.count
+                  var distance = Math.round(response.ytd_run_totals.distance/1000)
+                  var moving_time = toDDHHMMSS(response.ytd_run_totals.moving_time)
+                  var elevation_gain = response.ytd_run_totals.elevation_gain 
+
+                  //var runTime = toDDHHMMSS(response[0].moving_time);
+                  //var runDistance = (response[0].distance/1000);
+                  //var runSpeed = getSeconds(response[0].average_speed);
+            return handlerInput.responseBuilder
+                .speak("<audio src='soundbank://soundlibrary/human/amzn_sfx_person_running_01'/> So far this year you have ran <say-as interpret-as='interjection'>"+response.ytd_run_totals.count+' times</say-as>, covered '+distance+' kilometers , in '+moving_time+' with elevation gain of '+elevation_gain+' meters')
+                .reprompt("What would you like?")
+                .getResponse();
+        }
+    }
+};
+
+//List CLub intent
+const ListClubsHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'ListClubsIntent';
+  },
+   async handle(handlerInput) {
+      var accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
+      const getOptions = buildGetOptions('/api/v3/athlete/clubs',accessToken);
+      const response = await chuck(getOptions);
+      var numRuns = response.ytd_run_totals.count
+      var speechText="You are a member of "+response.length+" clubs.";
+      for(i=0; i<response.length; i++){
+        speechText = speechText+response[i].name+' in '+speechText+response[i].city+' has '+speechText+response[i].member_count+'. ';
+      }
+      
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      //.withSimpleCard('Hello !', speechText)
+      .getResponse();
+  }
+};
+
+
+
+//HELLO
+const HelloWorldIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
+>>>>>>> parent of 2a91419... subimssion
   },
   handlerInput.attributesManager.setSessionAttributes({"athleteID":id,"firstname":firstName});
     return handlerInput.responseBuilder
@@ -241,7 +376,7 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'Ask me about your recent run, or about a run on specific date';
+    const speechText = 'You can say hello to me, or ask me about your runs';
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -309,6 +444,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     RunningIntentConfirmSlotHandler,
     RunningIntentInProgressHandler,
     RunningIntentHandler,
+    ListClubsHandler,
     YTDIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
