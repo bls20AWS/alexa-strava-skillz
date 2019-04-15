@@ -162,6 +162,7 @@ const RunningIntentHandler = {
 >>>>>>> parent of 2a91419... subimssion
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 /////main running intent for strava///
 //const RunningIntentHandler = {
@@ -246,6 +247,8 @@ const RunningIntentHandler = {
 //      }
 //    }
 //};
+=======
+>>>>>>> parent of 2a91419... subimssion
 =======
 >>>>>>> parent of 2a91419... subimssion
 
