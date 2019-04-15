@@ -85,14 +85,14 @@ const RunningIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
-<<<<<<< HEAD
+
   handlerInput.attributesManager.setSessionAttributes({"athleteID":id,"firstname":firstName});
     return handlerInput.responseBuilder
          .speak('speechTexthi')
       .withSimpleCard('Goodbye!', speechText)
       .getResponse();
 
-=======
+
     async handle(handlerInput) {
       var accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
       if (accessToken == undefined){
@@ -159,10 +159,8 @@ const RunningIntentHandler = {
         return handlerInput.responseBuilder.speak(speechText).reprompt("What would you like?").getResponse();
       }
     }
->>>>>>> parent of 2a91419... subimssion
 };
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 //
 /////main running intent for strava///
 //const RunningIntentHandler = {
@@ -247,19 +245,14 @@ const RunningIntentHandler = {
 //      }
 //    }
 //};
-=======
->>>>>>> parent of 2a91419... subimssion
-=======
->>>>>>> parent of 2a91419... subimssion
-
 
 
 //Athlete intent///
 const YTDIntentHandler = {
   canHandle(handlerInput) {
-<<<<<<< HEAD
+
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
-=======
+
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'YTDIntent';
   },
@@ -328,7 +321,6 @@ const HelloWorldIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
->>>>>>> parent of 2a91419... subimssion
   },
   handlerInput.attributesManager.setSessionAttributes({"athleteID":id,"firstname":firstName});
     return handlerInput.responseBuilder
