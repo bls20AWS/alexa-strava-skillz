@@ -7,11 +7,10 @@
 
 ```
 ## Bringing Strava to your Alexa device
-
+![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/strava%20bot%20alexa.png)
 ### example Output:
 https://soundcloud.com/user-894984300/alexarecentrunexample
 
-![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/strava%20bot%20alexa.png)
 ![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/skill%20response2.png)
 
 Ask Alexa for running information from any of your runs to hear your average speed. running time, distance and heart rate.
