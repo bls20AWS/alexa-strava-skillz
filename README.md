@@ -6,13 +6,11 @@
    |_||_|   |____/  \__||_|   \__,_|  \_/  \__,_| |____/  \___/  \__|   |_||_|                                                   
 
 ```
-![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/strava%20bot%20alexa.png)
+
 ## Bringing Strava to your Alexa device
 
 ### Example Output:
 https://soundcloud.com/user-894984300/alexarecentrunexample
-
-![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/skill%20response2.png)
 
 Ask Alexa for running information from any of your runs to hear your average speed. running time, distance and heart rate.
 Alexa will also inform you of any achievements or kudos given and tell you how the run compares to your average time in similar runs.
@@ -34,3 +32,7 @@ Future releases will include:
 For a guide on how this skill was built refer to :
 
 https://thewebsmithsite.wordpress.com/2019/04/12/guide-building-an-alexa-skill-using-lambda-node-js-and-the-strava-api/
+
+
+![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/strava%20bot%20alexa.png)
+![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/skill%20response2.png)
