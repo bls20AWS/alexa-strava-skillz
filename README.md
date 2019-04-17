@@ -29,3 +29,6 @@ Future releases will include:
 4. Support multiple activity types (cycling / swimming etc). Currently only running is supported.
 5. Ability to update activities.
 6. Ability to query friends activities and leave comments / give kudos
+
+For a guide t how this skill was built refere to :
+https://thewebsmithsite.wordpress.com/2019/04/12/guide-building-an-alexa-skill-using-lambda-node-js-and-the-strava-api/
