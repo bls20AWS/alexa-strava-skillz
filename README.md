@@ -1,3 +1,4 @@
+![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/strava%20bot%20alexa.png)
 ```
     _  _     ____   _                              ____          _       _  _                                                    
   _| || |_  / ___| | |_  _ __  __ _ __   __ __ _  | __ )   ___  | |_   _| || |_                                                  
@@ -7,8 +8,8 @@
 
 ```
 ## Bringing Strava to your Alexa device
-![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/strava%20bot%20alexa.png)
-### example Output:
+
+### Example Output:
 https://soundcloud.com/user-894984300/alexarecentrunexample
 
 ![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/skill%20response2.png)
