@@ -1,4 +1,3 @@
-![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/strava%20bot%20alexa.png)
 ```
     _  _     ____   _                              ____          _       _  _                                                    
   _| || |_  / ___| | |_  _ __  __ _ __   __ __ _  | __ )   ___  | |_   _| || |_                                                  
@@ -7,6 +6,7 @@
    |_||_|   |____/  \__||_|   \__,_|  \_/  \__,_| |____/  \___/  \__|   |_||_|                                                   
 
 ```
+![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/strava%20bot%20alexa.png)
 ## Bringing Strava to your Alexa device
 
 ### Example Output:
