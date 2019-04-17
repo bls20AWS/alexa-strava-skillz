@@ -6,7 +6,7 @@
    |_||_|   |____/  \__||_|   \__,_|  \_/  \__,_| |____/  \___/  \__|   |_||_|                                                   
 
 ```
-##Bringing Strava to your Alexa device
+## Bringing Strava to your Alexa device
 
 
 Ask Alexa for running information from any of your runs to hear your average speed. running time, distance and heart rate.
