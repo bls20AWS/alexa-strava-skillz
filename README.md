@@ -1,7 +1,18 @@
-# alexa strava skillz
+    _  _     ____   _                              ____          _       _  _                                                    
+  _| || |_  / ___| | |_  _ __  __ _ __   __ __ _  | __ )   ___  | |_   _| || |_                                                  
+ |_  ..  _| \___ \ | __|| '__|/ _` |\ \ / // _` | |  _ \  / _ \ | __| |_  ..  _|                                                 
+ |_      _|  ___) || |_ | |  | (_| | \ V /| (_| | | |_) || (_) || |_  |_      _|                                                 
+   |_||_|   |____/  \__||_|   \__,_|  \_/  \__,_| |____/  \___/  \__|   |_||_|                                                   
+  ____         _                _                 ____   _                              _              _     _                   
+ | __ )  _ __ (_) _ __    __ _ (_) _ __    __ _  / ___| | |_  _ __  __ _ __   __ __ _  | |_  ___      / \   | |  ___ __  __ __ _ 
+ |  _ \ | '__|| || '_ \  / _` || || '_ \  / _` | \___ \ | __|| '__|/ _` |\ \ / // _` | | __|/ _ \    / _ \  | | / _ \\ \/ // _` |
+ | |_) || |   | || | | || (_| || || | | || (_| |  ___) || |_ | |  | (_| | \ V /| (_| | | |_| (_) |  / ___ \ | ||  __/ >  <| (_| |
+ |____/ |_|   |_||_| |_| \__, ||_||_| |_| \__, | |____/  \__||_|   \__,_|  \_/  \__,_|  \__|\___/  /_/   \_\|_| \___|/_/\_\\__,_|
+                         |___/            |___/                                                                                                                                                     
+
 
 Ask Alexa for running information from any of your runs to hear your average speed. running time, distance and heart rate.
-Alexa will also inform you of any achievements or Kudos given and tell you how the run compares to your average time in similar runs.
+Alexa will also inform you of any achievements or kudos given and tell you how the run compares to your average time in similar runs.
 
 
 Find out your summary info so far this year.
