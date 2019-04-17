@@ -1,7 +1,10 @@
 const Alexa = require('ask-sdk-core');
 const https = require('https');
+var helpers = require('./helpers');
 
-//Launch
+//==========================================================================
+// ===================== Launch Intent =====================================
+//==========================================================================
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
    
@@ -14,8 +17,8 @@ const LaunchRequestHandler = {
             var speechText = "Please use the Alexa app to link your Amazon account with your Strava Account.";        
             return handlerInput.responseBuilder.speak(speechText).withLinkAccountCard().getResponse();
         } else { 
-            const getOptions = buildGetOptions('/api/v3/athlete',accessToken);
-            const response = await chuck(getOptions);
+            const getOptions = helpers.helpers.buildGetOptions('/api/v3/athlete',accessToken);
+            const response = await helpers.chuck(getOptions);
                   var id = response.id;
                   var firstName = response.firstname;
                   handlerInput.attributesManager.setSessionAttributes({"athleteID":id,"firstname":firstName});
@@ -75,7 +78,9 @@ const RunningIntentInProgressHandler={
 };
 
 
-///main running intent for strava///
+//============================================================================
+// ============= Running Intent once slots are filled======================
+//============================================================================  
 const RunningIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -100,8 +105,8 @@ const RunningIntentHandler = {
         
         
         const attributes = handlerInput.attributesManager.getSessionAttributes();
-        const getOptions = buildGetOptions('https://www.strava.com/api/v3/athlete/activities'+params,accessToken);
-        const response = await chuck(getOptions);
+        const getOptions = helpers.buildGetOptions('https://www.strava.com/api/v3/athlete/activities'+params,accessToken);
+        const response = await helpers.chuck(getOptions);
         
         if(response.length>0){
           var speechText = "<audio src='soundbank://soundlibrary/human/amzn_sfx_person_running_01'/> ";
@@ -114,9 +119,9 @@ const RunningIntentHandler = {
         
         for(i=0; i<response.length; i++){
           var runName = response[i].name;
-          var runTime = toDDHHMMSS(response[i].moving_time);
+          var runTime = helpers.toDDHHMMSS(response[i].moving_time);
           var runDistance = (response[i].distance/1000).toFixed(2);
-          var runSpeed = getSeconds(response[i].average_speed);
+          var runSpeed = helpers.getSeconds(response[i].average_speed);
           var achievements = response[i].achievement_count;
           var average_heartrate = response[i].average_heartrate;
           var id = response[i].id;
@@ -138,8 +143,8 @@ const RunningIntentHandler = {
            speechText=speechText + achievementText;
           
 
-          const getOptions2 = buildGetOptions('https://www.strava.com/api/v3/activities/'+id,accessToken);
-          const response2 = await chuck(getOptions2);
+          const getOptions2 = helpers.buildGetOptions('https://www.strava.com/api/v3/activities/'+id,accessToken);
+          const response2 = await helpers.chuck(getOptions2);
           if(response2.similar_activities){
             var SimilarAverage = response2.similar_activities.average_speed;
             var SimilarAvarageRunTime = response[i].distance/SimilarAverage;
@@ -149,7 +154,7 @@ const RunningIntentHandler = {
             }else{
               var verb ='slower';
             }
-            speechText= speechText+   ". This is "+toDDHHMMSS(Math.round(Math.abs(difference)))+' '+verb+' than your average for this run';
+            speechText= speechText+   ". This is "+helpers.toDDHHMMSS(Math.round(Math.abs(difference)))+' '+verb+' than your average for this run';
           }
         }
         return handlerInput.responseBuilder.speak(speechText).getResponse();
@@ -158,14 +163,14 @@ const RunningIntentHandler = {
 };
 
 
-
+//============================================================================
+// =========================== Year to Date Intent============================
+//============================================================================  
 const YTDIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'YTDIntent';
   },
-
-  
  async handle(handlerInput) {
     var accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
     if (accessToken == undefined){
@@ -173,17 +178,17 @@ const YTDIntentHandler = {
       return handlerInput.responseBuilder.speak(speechText).withLinkAccountCard().getResponse();
     } else {
 
-        const getOptionsForAthlete = buildGetOptions('https://www.strava.com/api/v3/athlete',accessToken);
-        const responseForAthlete = await chuck(getOptionsForAthlete);
+        const getOptionsForAthlete = helpers.buildGetOptions('https://www.strava.com/api/v3/athlete',accessToken);
+        const responseForAthlete = await helpers.chuck(getOptionsForAthlete);
         var athleteID = responseForAthlete.id;
         var firstName = responseForAthlete.firstname;
        // handlerInput.attributesManager.setSessionAttributes({"athleteID":id,"firstname":firstName});
             
-        const getOptions = buildGetOptions('https://www.strava.com/api/v3/athletes/'+athleteID+'/stats',accessToken);
-        const response = await chuck(getOptions);
+        const getOptions = helpers.buildGetOptions('https://www.strava.com/api/v3/athletes/'+athleteID+'/stats',accessToken);
+        const response = await helpers.chuck(getOptions);
         var numRuns = response.ytd_run_totals.count
         var distance = Math.round(response.ytd_run_totals.distance/1000)
-        var moving_time = toDDHHMMSS(response.ytd_run_totals.moving_time)
+        var moving_time = helpers.toDDHHMMSS(response.ytd_run_totals.moving_time)
         var elevation_gain = response.ytd_run_totals.elevation_gain 
         
         return handlerInput.responseBuilder
@@ -192,7 +197,9 @@ const YTDIntentHandler = {
   }
 };
 
-//HELP
+//============================================================================
+// =========================== Help Intent====================================
+//============================================================================
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -209,7 +216,9 @@ const HelpIntentHandler = {
   }
 };
 
-//STOP
+//==========================================================================
+// =========================== STOP Intent==================================
+//==========================================================================
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -227,7 +236,9 @@ const CancelAndStopIntentHandler = {
 
 
 
-//for clean up
+//==========================================================================
+// =========================== Clean up ====================================
+//==========================================================================
 const SessionEndedRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
@@ -241,7 +252,9 @@ const SessionEndedRequestHandler = {
 
 
 
-//handle the errors
+//==========================================================================
+// ===================== Error Handling ====================================
+//==========================================================================
 const ErrorHandler = {
   canHandle() {
     return true;
@@ -256,9 +269,9 @@ const ErrorHandler = {
   },
 };
 
-//////
-/// The LAMBDA HANDER FOR ROUTING
-//////
+//==========================================================================
+// ===================== Lambda routing handler=============================
+//==========================================================================
 exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     LaunchRequestHandler,
@@ -271,74 +284,3 @@ exports.handler = Alexa.SkillBuilders.custom()
     SessionEndedRequestHandler)
   .addErrorHandlers(ErrorHandler)
   .lambda();
-
-// 3. Helper Functions ==========================================================================
-
-
-function buildGetOptions(path, token) {
-    return{
-        host: 'www.strava.com',
-        path:path,
-        port: 443,
-        headers: {
-            Authorization: "Bearer "+token
-          },
-        method: 'GET',
-    };
-}
-
-
-function chuck(options) {
-  return new Promise(((resolve, reject) => {
-    const request = https.request(options, (response) => {
-      response.setEncoding('utf8');
-      let returnData = '';
-
-      response.on('data', (chunk) => {
-        returnData += chunk;
-      });
-
-      response.on('end', () => {
-        resolve(JSON.parse(returnData));
-      });
-
-      response.on('error', (error) => {
-        reject(error);
-      });
-    });
-    request.end();
-  }));
-}
-
-function getSeconds(meterperSecond){
-  var km_per_min = meterperSecond*60/1000;
-  var min_per_km = 1/km_per_min;
-  var whole_mins = Math.floor(min_per_km);
-  var remainder_frac_min = min_per_km-whole_mins;
-  var hr_secs = remainder_frac_min*60;
-  return whole_mins+"'"+hr_secs.toFixed(0)+'"';
-}
-
-function toDDHHMMSS(inputSeconds){
-        const Days = Math.floor( inputSeconds / (60 * 60 * 24) );
-        const Hour = Math.floor((inputSeconds % (60 * 60 * 24)) / (60 * 60));
-        const Minutes = Math.floor(((inputSeconds % (60 * 60 * 24)) % (60 * 60)) / 60 );
-        const Seconds = Math.floor(((inputSeconds % (60 * 60 * 24)) % (60 * 60)) % 60 );
-        let ddhhmmss  = '';
-        if (Days > 0){
-            ddhhmmss += Days + ' Days ';
-        }
-        if (Hour > 0){
-            ddhhmmss += Hour + ' Hours ';
-        }
-
-        if (Minutes > 0){
-            ddhhmmss += Minutes + ' Minutes ';
-        }
-
-        if (Seconds > 0){
-            ddhhmmss += Seconds + ' Seconds ';
-        }
-        return ddhhmmss;
-  }
-
