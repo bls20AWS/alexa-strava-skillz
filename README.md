@@ -11,7 +11,7 @@
 ### example Output:
 https://soundcloud.com/user-894984300/alexarecentrunexample
 
-![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/skill%20response.png)
+![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/skill%20response2.png)
 
 Ask Alexa for running information from any of your runs to hear your average speed. running time, distance and heart rate.
 Alexa will also inform you of any achievements or kudos given and tell you how the run compares to your average time in similar runs.
