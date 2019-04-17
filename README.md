@@ -30,5 +30,6 @@ Future releases will include:
 5. Ability to update activities.
 6. Ability to query friends activities and leave comments / give kudos
 
-For a guide t how this skill was built refere to :
+For a guide on how this skill was built refer to :
+
 https://thewebsmithsite.wordpress.com/2019/04/12/guide-building-an-alexa-skill-using-lambda-node-js-and-the-strava-api/
