@@ -11,6 +11,9 @@
 ### example Output:
 https://soundcloud.com/user-894984300/alexarecentrunexample
 
+![Alt text](/screenshots/strava alexa account linking.png.png?raw=true "strava alexa account linking")
+
+
 Ask Alexa for running information from any of your runs to hear your average speed. running time, distance and heart rate.
 Alexa will also inform you of any achievements or kudos given and tell you how the run compares to your average time in similar runs.
 
