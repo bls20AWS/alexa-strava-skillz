@@ -1,0 +1,29 @@
+Strava Skillz  Privacy Policy
+Last updated: 2019-10-04
+
+Knownentity Consulting Limited ("us", "we", or "our") operates the Strava Skillz skill for the Amazon Alexa devices (the "Skill"). This page informs you of our policies regarding the collection, use and disclosure of Personal Information we receive from users of the Skill.
+
+We use your Personal Information only for providing and improving the Skill. By using the Skill, you agree to the collection and use of information in accordance with this policy.
+
+Information Collection And Use
+While using our Skill, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to your Strava.com access token ("Personal Information").
+
+Log Data
+Like many site operators, we collect information that your device sends whenever you visit our Skill ("Log Data").
+This Log Data may include information such as your device's Internet Protocol ("IP") address, browser type, browser version, the pages of our Skill that you visit, the time and date of your visit, the time spent on those pages and other statistics.
+
+In addition, we may use third party services such as Amazon Cloud Watch and DynamoDB that collect, monitor and analyze this information.
+
+Communications
+We will not use your Personal Information to contact you with newsletters, marketing or promotional materials or any other information without your explicit consent.
+
+Security
+The security of your Personal Information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage, is 100% secure. While we strive to use commercially acceptable means to protect your Personal Information, we cannot guarantee its absolute security.
+
+Changes To This Privacy Policy
+This Privacy Policy is effective as of 2018-11-02 and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page.
+
+We reserve the right to update or change our Privacy Policy at any time and you should check this Privacy Policy periodically. Your continued use of the Service after we post any modifications to the Privacy Policy on this page will constitute your acknowledgment of the modifications and your consent to abide and be bound by the modified Privacy Policy.
+
+Contact Us
+If you have any questions about this Privacy Policy, please contact us.

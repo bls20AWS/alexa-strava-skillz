@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: stravaSkilz
+Transform:
+- AWS::Serverless-2016-10-31
+Parameters:
+  GoogleMapsAPI:
+    Type: String
+    Description: Google Maps API
+Resources:
+  StravaSkillz2:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/index.handler
+      Environment:
+        Variables:
+          GoogleMapsAPI:
+            Ref: GoogleMapsAPI
+      Runtime: nodejs12.x
+      MemorySize: 128
+      Timeout: 100
+      Description: A lambda-lith for stravaSkillz.
+      Events:
+        AlexaSkillEvent:
+          Type: AlexaSkill
+      Policies:
+      - AWSLambdaBasicExecutionRole
+      CodeUri: StravaSkillz2
