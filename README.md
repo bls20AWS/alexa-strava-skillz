@@ -34,5 +34,5 @@ For a guide on how this skill was built refer to :
 https://thewebsmithsite.wordpress.com/2019/04/12/guide-building-an-alexa-skill-using-lambda-node-js-and-the-strava-api/
 
 
-![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/strava%20bot%20alexa.png)
-![image](https://raw.githubusercontent.com/bls20Automic/alexa-strava-skillz/master/screenshots/skill%20response2.png)
+![image](/screenshots/strava%20bot%20alexa.png)
+![image](/screenshots/skill%20response2.png)
